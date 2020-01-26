@@ -192,6 +192,23 @@ function getAllNotes() {
     return notes;
 }
 
+function sendData(content) {
+    fetch('https://localhost/5000', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(content),
+        })
+        .then((response) => response.json())
+        .then((content) => {
+            console.log('Success:', content);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
+
 
 function deleteNote(dateTime) {
     localStorage.removeItem('note-' + dateTime);
