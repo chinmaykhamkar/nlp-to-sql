@@ -73,13 +73,23 @@
     ]
   },
   {
-    "entity": "operator",
+    "entity": "agg",
     "option": "avg",
     "languages": [
       "en"
     ],
     "sourceTexts": [
-      "avg", "average" , "net","cumulative"
+      "avg", "average","mean"
+    ]
+  },
+  {
+    "entity": "agg",
+    "option": "sum",
+    "languages": [
+      "en"
+    ],
+    "sourceTexts": [
+      "sum", "summation" , "total","cumulative", "net","cumulative"
     ]
   }
 ]

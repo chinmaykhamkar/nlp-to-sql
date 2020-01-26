@@ -28,6 +28,8 @@ for(let namedEntitie of namedEntities){
 // manager.addBetweenCondition('en', 'column', 'where', 'is');
 // manager.addAfterLastCondition('en', 'column', 'have');
 manager.addBetweenCondition('en', 'column',['that','have','that have','where'], ['is','as','greater','less','equal','more']);
+manager.addBetweenCondition('en', 'aggColumn',["max", "maximum","highest","largest", "min", "minimum","smallest","lowest","avg", "average" , "net","cumulative",'sum'], ['of','from']);
+
 // manager.addBetweenCondition('en', 'column',['have','which'], 'as');
 // manager.addBetweenCondition('en', 'column',['have','which'], 'greater');
 // manager.addBetweenCondition('en', 'column',['have','which'], 'less');
@@ -50,7 +52,7 @@ manager.addAfterLastCondition('en', 'colData', ['is','as','than','equals','equal
 //     const data = manager.export(true);
 //     fs.writeFileSync('NLUManager/trainedModels/nlu-model.json', data);
 // })();
-let sentence ='show all data of students where marks more than 3';
+let sentence ='total marks of all students which have attendance greater than 50';
 manager.train()
 .then(result => manager.process('en',sentence ))
 .then(result => {
@@ -65,14 +67,18 @@ manager.train()
   let column = result.entities.filter((element)=>{
     return element.entity === 'column'
   })[0];
+  let aggColumn = result.entities.filter((element)=>{
+    return element.entity === 'aggColumn'
+  })[0];
+  let agg = result.entities.filter((element)=>{
+    return element.entity === 'agg'
+  })[0];
   let colData = result.entities.filter((element)=>{
     return element.entity === 'colData'
   })[0];
 
   let sql;
 
-//   let tableName = table.option;
-//   let operatorName =
   if(result.intent == "select"){
     sql=`select * from ${table.option}`;
   }
@@ -89,6 +95,15 @@ manager.train()
     sql=`select count(*) from ${table.option} where ${column.sourceText} ${operator.option} ${colData.sourceText}`;
   }
 
+  if(result.intent == "agg"){
+
+    sql=`select ${agg.option}(${(aggColumn.sourceText)?(aggColumn.sourceText):('*')}) from ${table.option}`;
+  }
+
+  if(result.intent == "agg.where"){
+
+    sql=`select ${agg.option}(${(aggColumn.sourceText)?(aggColumn.sourceText):('*')}) from ${table.option} where ${column.sourceText} ${operator.option} ${colData.sourceText}`;
+  }
   console.log(sql)
 })
 .then(()=>{
