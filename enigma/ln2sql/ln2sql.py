@@ -57,6 +57,8 @@ class Ln2sql:
             full_query += str(query)
             print(query)
 
+        f = open('query.txt','w')
+        f.write(full_query)
         return full_query
 
     def remove_json(self, filename="output.json"):

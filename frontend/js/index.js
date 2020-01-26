@@ -16,7 +16,7 @@ var noteContent = '';
 
 // Get all notes from previous sessions and display them.
 var notes = getAllNotes();
-renderNotes(notes);
+// renderNotes(notes);
 
 
 
@@ -111,14 +111,35 @@ $('#save-note-btn').on('click', function(e) {
 
 })
 
+$('#save-note-btn-node').on('click', function(e) {
+    recognition.stop();
+
+    if (!noteContent.length) {
+        instructions.text('Could not save empty note. Please add a message to your note.');
+    } else {
+        // Save note to localStorage.
+        // The key is the dateTime with seconds, the value is the content of the note.
+        saveNote(new Date().toLocaleString(), noteContent);
+
+        saveText(noteContent);
+        // Reset variables and update UI.
+        noteContent = '';
+        // renderNotes(getAllNotes());
+        noteTextarea.val('');
+        // instructions.text('Note saved successfully.');
+    }
+
+    sendDataNode(localStorage.getItem('query'));
+
+})
+
 
 function saveText(queryContent) {
     localStorage.setItem('query', queryContent);
 }
 
-
-function sendData(data) {
-    fetch('http://127.0.0.1:5000/', {
+function sendDataNode(data) {
+    fetch('http://127.0.0.1:3000/', {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',
@@ -128,6 +149,27 @@ function sendData(data) {
         .then((response) => response.json())
         .then((data) => {
             console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
+
+function sendData(data) {
+    fetch('http://127.0.0.1:5000/', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Success:', data);
+            var list = [];
+            list.push(data.query);
+            renderQuery(list);
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -153,6 +195,23 @@ notesList.on('click', function(e) {
 });
 
 
+function renderQuery(list) {
+    console.log(list)
+    var html = '';
+    if (list.length) {
+        list.forEach(function() {
+            html += `<li class="note">
+          <p class="header">          
+          <p class="content">${list}</p>
+          </p>
+        </li>`;
+        });
+    } else {
+        html = '<li><p class="content">You don\'t have any notes yet.</p></li>';
+    }
+    notesList.html(html);
+
+}
 
 /*-----------------------------
       Speech Synthesis 
@@ -176,24 +235,22 @@ function readOutLoud(message) {
       Helper Functions 
 ------------------------------*/
 
-function renderNotes(notes) {
-    var html = '';
-    if (notes.length) {
-        notes.forEach(function(note) {
-            html += `<li class="note">
-          <p class="header">
-            <span class="date">${note.date}</span>
-            <a href="#" class="listen-note" title="Listen to Note">Listen to Note</a>
-            <a href="#" class="delete-note" title="Delete">Delete</a>
-          </p>
-          <p class="content">${note.content}</p>
-        </li>`;
-        });
-    } else {
-        html = '<li><p class="content">You don\'t have any notes yet.</p></li>';
-    }
-    notesList.html(html);
-}
+// function renderNotes(data) {
+//     console.log(data)
+//     var html = '';
+//     if (data.length) {
+//         data.forEach(function() {
+//             html += `<li class="note">
+//           <p class="header">          
+//           <p class="content">${data}</p>
+//           </p>
+//         </li>`;
+//         });
+//     } else {
+//         html = '<li><p class="content">You don\'t have any notes yet.</p></li>';
+//     }
+//     notesList.html(html);
+// }
 
 
 function saveNote(dateTime, content) {
