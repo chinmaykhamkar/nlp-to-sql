@@ -107,7 +107,7 @@ $('#save-note-btn').on('click', function(e) {
         // instructions.text('Note saved successfully.');
     }
 
-    sendData(localStorage.getItem('query'));
+    sendData({ sentence: localStorage.getItem('query') });
 
 })
 
