@@ -41,6 +41,9 @@ manager.addBetweenCondition('en', 'newColumn',["update", "edit" , "overwrite" , 
 
 manager.addAfterLastCondition('en', 'colData', ['is','as','than','equals','equal to']);
 manager.addBetweenCondition('en', 'newColData', ['as','to'],['in','where']);
+manager.addBetweenCondition('en', 'attribute', ['show','display','details','select'],['from','of']);
+manager.addAfterLastCondition('en', 'attribute', ['and']);
+manager.addBeforeCondition('en', 'attribute', ['and']);
 // manager.addAfterLastCondition('en', 'colData', 'as');
 // manager.addAfterLastCondition('en', 'colData', 'than');
 // manager.addAfterLastCondition('en', 'colData', 'equals');
@@ -54,7 +57,7 @@ manager.addBetweenCondition('en', 'newColData', ['as','to'],['in','where']);
 //     const data = manager.export(true);
 //     fs.writeFileSync('NLUManager/trainedModels/nlu-model.json', data);
 // })();
-let sentence ='update id as 5 in students where name is Shail';
+let sentence ='show id and roll of students';
 manager.train()
 .then(result => manager.process('en',sentence ))
 .then(result => {
@@ -84,11 +87,25 @@ manager.train()
   let newColumn = result.entities.filter((element) => {
     return element.entity === 'newColumn'
   })[0];
+  let attribute = result.entities.filter((element) => {
+    return element.entity === 'attribute'
+  })[0];
 
   let sql;
 
   if(result.intent == "select"){
     sql=`select * from ${table.option}`;
+  }
+
+  if(result.intent == "select.var"){
+    if(attribute.sourceText.includes("and")){
+      attr = attribute.sourceText.split(' and ')
+      console.log(attr)
+    }else{
+      attr = attribute.sourceText.split(' ')
+    }
+    str = attr.join(',')
+    sql=`select ${str} from ${table.option}`;
   }
 
   if(result.intent == "select.where"){

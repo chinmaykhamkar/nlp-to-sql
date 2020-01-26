@@ -1,8 +1,11 @@
 [
   {
-    "show me everything of %table%":"select",
-    "display all data from %table%":"select",
-    "details of %table%":"select"
+    "show me everything of %table%": "select",
+    "display all data from %table%": "select",
+    "details of %table%": "select"
+  },{
+    "show %attribute% of %table%": "select.var",
+    "display %attribute% from %table%": "select.var"
   },{
     "give all %table% where %column% is equal to %colData%":"select.where",
     "show %tables% which have %column% %operator% %colData%":"select.where",
