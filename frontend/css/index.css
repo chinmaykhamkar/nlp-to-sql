@@ -89,3 +89,10 @@ button:focus {
         display: none;
     }
 }
+
+.send-btn {
+    background-color: tomato;
+    width: 10rem;
+    color: white;
+    border-radius: 4px;
+}
