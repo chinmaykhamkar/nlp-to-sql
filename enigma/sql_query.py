@@ -11,8 +11,7 @@ cors = CORS(app)
 def postJsonHandler():
     content = request.get_json()
     q = content['sentence']
-    print(q)
-    query_sql = "python3 -m ln2sql.main -d database_store/city.sql -l lang_store/english.csv -j output.json -i " + '"' + q + '"'
+    query_sql = "python -m ln2sql.main -d database_store/city.sql -l lang_store/english.csv -j output.json -i " + '"' + q + '"'
     os.system(query_sql)
     f = open('query.txt','r')
     ans = f.read()
