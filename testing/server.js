@@ -23,7 +23,15 @@ async function handleRequest(req, res) {
         if(!sentence) throw new Error('sentence not found');    
 
         let query = await nlpHandler.processSentence(sentence);
-        res.send({query:query}); //write a response to the client
+
+        // if(query)
+        // let answers  = await nlpHandler.executeQuery(query);
+
+        
+        res.send({
+            query:query,
+            // answers:(answers)?(answers):(null)
+        }); //write a response to the client
 
     } catch (error) {
         res.send({msg:error.message}); //write a response to the client
