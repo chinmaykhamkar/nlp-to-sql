@@ -144,12 +144,15 @@ function sendDataNode(data) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            json:true,
+            json: true,
             body: JSON.stringify(data),
         })
         .then((response) => response.json())
         .then((data) => {
             console.log('Success:', data);
+            var list = [];
+            list.push(data.query);
+            renderQuery(list);
         })
         .catch((error) => {
             console.error('Error:', error);

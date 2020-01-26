@@ -1,4 +1,3 @@
 
-SELECT city.id
-FROM city
-WHERE city.cityName = 'pune';
+SELECT *
+FROM city;

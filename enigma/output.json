@@ -1,6 +1,6 @@
 {
 	"select": {
-		"column": "id",
+		"column": "None",
 		"type": "[]"
 	},
 	"from": {
@@ -9,13 +9,6 @@
 	"join": {
 	},
 	"where": {
-		"condition": [
-			{ "column": "cityName",
-			  "type": "None",
-			  "operator": "=",
-			  "value": "'pune'"
-			}
-		]
 	},
 	"group_by": {
 	},
