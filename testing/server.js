@@ -10,15 +10,21 @@ function handleRequest(req,res){
     })
 
     req.on('end',async () => {
-        console.log('data',mdata)
-      let body = JSON.parse(mdata) // 'Buy the milk'
+        try {
+            
+            console.log('data',mdata)
+            let body = JSON.parse(mdata) // 'Buy the milk'
 
-      console.log(body);
+            console.log(body);
 
-      let query = await nlpHandler.processSentence(body.sentence);
-      res.write(query); //write a response to the client
-      res.end(); //end the response
-  
+            let query = await nlpHandler.processSentence(body.sentence);
+            res.write(query); //write a response to the client
+            res.end(); //end the response
+        
+        } catch (error) {
+            res.write(error.message); //write a response to the client
+            res.end(); //end the response
+        }
     })
 
 }
