@@ -1,0 +1,17 @@
+{
+	"select": {
+		"column": "None",
+		"type": "[]"
+	},
+	"from": {
+		"table": "city"
+	},
+	"join": {
+	},
+	"where": {
+	},
+	"group_by": {
+	},
+	"select": {
+	},
+}
