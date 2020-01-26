@@ -52,7 +52,7 @@ manager.addAfterLastCondition('en', 'colData', ['is','as','than','equals','equal
 //     const data = manager.export(true);
 //     fs.writeFileSync('NLUManager/trainedModels/nlu-model.json', data);
 // })();
-let sentence ='cumulative marks of students which have attendance greater than 50';
+let sentence ='total marks of all students which have attendance greater than 50';
 manager.train()
 .then(result => manager.process('en',sentence ))
 .then(result => {
