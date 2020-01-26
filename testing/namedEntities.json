@@ -1,0 +1,54 @@
+[
+  {
+    "entity": "table",
+    "option": "students",
+    "languages": [
+      "en"
+    ],
+    "sourceTexts": [
+      "students", "student","children"
+    ]
+  },
+  {
+    "entity": "table",
+    "option": "teacher",
+    "languages": [
+      "en"
+    ],
+    "sourceTexts": [
+      "teachers", "teacher","professor"
+    ]
+  },
+
+  
+  {
+    "entity": "operator",
+    "option": "=",
+    "languages": [
+      "en"
+    ],
+    "sourceTexts": [
+      "equals", "as","equal to","same as","is"
+    ]
+  },
+  {
+    "entity": "operator",
+    "option": ">",
+    "languages": [
+      "en"
+    ],
+    "sourceTexts": [
+      "greater than", "more than","bigger than"
+    ]
+  },
+  {
+    "entity": "operator",
+    "option": "<",
+    "languages": [
+      "en"
+    ],
+    "sourceTexts": [
+      "less than", "smaller than"
+    ]
+  }
+]
