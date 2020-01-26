@@ -1,4 +1,4 @@
 
-SELECT city.id
-FROM city
-WHERE city.cityName = 'pune';
+SELECT teacher.id
+FROM teacher
+ORDER BY teacher.id DESC;

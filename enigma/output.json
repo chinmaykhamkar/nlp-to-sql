@@ -4,21 +4,16 @@
 		"type": "[]"
 	},
 	"from": {
-		"table": "city"
+		"table": "teacher"
 	},
 	"join": {
 	},
 	"where": {
-		"condition": [
-			{ "column": "cityName",
-			  "type": "None",
-			  "operator": "=",
-			  "value": "'pune'"
-			}
-		]
 	},
 	"group_by": {
 	},
 	"select": {
+		"column": "teacher.id",
+		"order": "DESC"
 	},
 }
