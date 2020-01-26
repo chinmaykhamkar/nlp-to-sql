@@ -28,6 +28,7 @@ class Ln2sql:
         if thesaurus_path:
             thesaurus = Thesaurus()
             thesaurus.load(thesaurus_path)
+            # print(type(thesaurus))
             database.set_thesaurus(thesaurus)
 
         if stopwords_path:
