@@ -5,7 +5,10 @@
     "details of %table%":"select",
     "show all %table%":"select",
     "give %table%":"select"
-    },{
+  },{
+    "show %attribute% of %table%": "select.var",
+    "display %attribute% from %table%": "select.var"
+  },{
     "give all %table% where %column% is equal to %colData%":"select.where",
     "show %table% which have %column% %operator% %colData%":"select.where",
     "show me data of all %table% that have %column% %operator% %colData%":"select.where",
