@@ -2,12 +2,13 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-@app.route('/', methods = ['GET','POST'])
+@app.route('/', methods = ['POST'])
 
-def home():
-    if request.method == 'GET':
-        data = 'hello world'
-        return jsonify({'data':data})
+def postJsonHandler():
+    print (request.is_json)
+    content = request.get_json()
+    print (content)
+    return content
 
 if __name__ == '__main__':
     app.run(debug = True)
