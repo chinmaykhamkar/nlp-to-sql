@@ -50,5 +50,36 @@
     "sourceTexts": [
       "less than", "smaller than"
     ]
+  },
+
+  {
+    "entity": "agg",
+    "option": "max",
+    "languages": [
+      "en"
+    ],
+    "sourceTexts": [
+      "max", "maximum","highest","largest"
+    ]
+  },
+  {
+    "entity": "agg",
+    "option": "min",
+    "languages": [
+      "en"
+    ],
+    "sourceTexts": [
+      "min", "minimum","smallest","lowest"
+    ]
+  },
+  {
+    "entity": "operator",
+    "option": "avg",
+    "languages": [
+      "en"
+    ],
+    "sourceTexts": [
+      "avg", "average" , "net","cumulative"
+    ]
   }
 ]

@@ -15,5 +15,9 @@
     "how many %table% have %column% %operator% %colData%":"count.where",
     "count %tables% which have %column% as %colData%":"count.where",
     "count data of all %table% that have %column% %operator% %colData%":"count.where"
+  },
+  {
+    "show me %agg% %column% of %table% ":"agg",
+    "give %agg% %column% from %table%": "agg"
   }
 ]

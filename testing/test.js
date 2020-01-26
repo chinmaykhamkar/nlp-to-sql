@@ -27,7 +27,7 @@ for(let namedEntitie of namedEntities){
 
 // manager.addBetweenCondition('en', 'column', 'where', 'is');
 // manager.addAfterLastCondition('en', 'column', 'have');
-manager.addBetweenCondition('en', 'column',['that','have','that have','where'], ['is','as','greater','less','equal']);
+manager.addBetweenCondition('en', 'column',['that','have','that have','where'], ['is','as','greater','less','equal','more']);
 // manager.addBetweenCondition('en', 'column',['have','which'], 'as');
 // manager.addBetweenCondition('en', 'column',['have','which'], 'greater');
 // manager.addBetweenCondition('en', 'column',['have','which'], 'less');
@@ -50,7 +50,7 @@ manager.addAfterLastCondition('en', 'colData', ['is','as','than','equals','equal
 //     const data = manager.export(true);
 //     fs.writeFileSync('NLUManager/trainedModels/nlu-model.json', data);
 // })();
-let sentence ='count all Students';
+let sentence ='show all data of students where marks more than 3';
 manager.train()
 .then(result => manager.process('en',sentence ))
 .then(result => {
