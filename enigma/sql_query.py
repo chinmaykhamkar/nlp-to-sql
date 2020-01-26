@@ -8,7 +8,8 @@ cors = CORS(app)
 
 def postJsonHandler():
     content = request.get_json()
-    print (content)
+    print (content['data'])
+    print(type(content))
     return content
 
 if __name__ == '__main__':
