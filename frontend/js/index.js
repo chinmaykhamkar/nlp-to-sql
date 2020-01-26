@@ -111,11 +111,49 @@ $('#save-note-btn').on('click', function(e) {
 
 })
 
+$('#save-note-btn-node').on('click', function(e) {
+    recognition.stop();
+
+    if (!noteContent.length) {
+        instructions.text('Could not save empty note. Please add a message to your note.');
+    } else {
+        // Save note to localStorage.
+        // The key is the dateTime with seconds, the value is the content of the note.
+        saveNote(new Date().toLocaleString(), noteContent);
+
+        saveText(noteContent);
+        // Reset variables and update UI.
+        noteContent = '';
+        // renderNotes(getAllNotes());
+        noteTextarea.val('');
+        // instructions.text('Note saved successfully.');
+    }
+
+    sendDataNode({ 'sentence': localStorage.getItem('query') });
+
+})
+
 
 function saveText(queryContent) {
     localStorage.setItem('query', queryContent);
 }
 
+function sendDataNode(data) {
+    fetch('http://127.0.0.1:3000/', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
 
 function sendData(data) {
     fetch('http://127.0.0.1:5000/', {
