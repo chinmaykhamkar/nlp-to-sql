@@ -56,7 +56,7 @@ class Ln2sql:
         for query in queries:
             full_query += str(query)
             print(query)
-
+        
         f = open('query.txt','w')
         f.write(full_query)
         return full_query
