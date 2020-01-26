@@ -97,14 +97,17 @@ $('#save-note-btn').on('click', function(e) {
     } else {
         // Save note to localStorage.
         // The key is the dateTime with seconds, the value is the content of the note.
-        saveNote(new Date().toLocaleString(), noteContent);
+        saveNote(noteContent);
 
         // Reset variables and update UI.
         noteContent = '';
-        renderNotes(getAllNotes());
+        // renderNotes(getAllNotes());
         noteTextarea.val('');
-        instructions.text('Note saved successfully.');
+        // instructions.text('Note saved successfully.');
     }
+    let data = localStorage.getItem('note-');
+    console.log(data);
+    sendData(data);
 
 })
 
@@ -171,8 +174,8 @@ function renderNotes(notes) {
 }
 
 
-function saveNote(dateTime, content) {
-    localStorage.setItem('note-' + dateTime, content);
+function saveNote(content) {
+    localStorage.setItem('note-' + content);
 }
 
 
@@ -193,7 +196,7 @@ function getAllNotes() {
 }
 
 function sendData(content) {
-    fetch('https://localhost/5000', {
+    fetch('http://127.0.0.1:5000/', {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',
