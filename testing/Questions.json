@@ -1,0 +1,19 @@
+[
+  {
+    "show me everything of %table%":"select",
+    "display all data from %table%":"select",
+    "details of %table%":"select"
+  },{
+    "give all %table% where %column% is equal to %colData%":"select.where",
+    "show %tables% which have %column% as %colData%":"select.where",
+    "show me data of all %table% that have %column% %operator% %colData%":"select.where"
+  },{
+    "count number of %table% ":"count",
+    "count all %table%": "count"
+  },{
+    "count number of %table% where %column% is equal to %colData%": "count.where",
+    "how many %table% have %column% %operator% %colData%":"count.where",
+    "count %tables% which have %column% as %colData%":"count.where",
+    "count data of all %table% that have %column% %operator% %colData%":"count.where"
+  }
+]
