@@ -5,9 +5,10 @@
     "details of %table%":"select"
   },{
     "give all %table% where %column% is equal to %colData%":"select.where",
-    "show %tables% which have %column% as %colData%":"select.where",
+    "show %tables% which have %column% %operator% %colData%":"select.where",
     "show me data of all %table% that have %column% %operator% %colData%":"select.where",
-    "display %tables% that have %column% as %colData%":"select.where"  
+    "display %tables% that have %column% %operator% %colData%":"select.where",
+     "%tables% with %column% %operator% %colData%":"select.where" 
   },{
     "count number of %table% ":"count",
     "count all %table%": "count"
