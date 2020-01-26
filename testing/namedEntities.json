@@ -1,7 +1,7 @@
 [
   {
     "entity": "table",
-    "option": "students",
+    "option": "student",
     "languages": [
       "en"
     ],
@@ -90,6 +90,16 @@
     ],
     "sourceTexts": [
       "sum", "summation" , "total","cumulative", "net","cumulative"
+    ]
+  },
+  {
+    "entity": "update",
+    "option": "update",
+    "languages": [
+      "en"
+    ],
+    "sourceTexts": [
+      "update", "edit" , "overwrite" , "change" , "modify"
     ]
   }
 ]
