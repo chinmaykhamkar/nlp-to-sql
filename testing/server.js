@@ -1,37 +1,46 @@
-var http = require('http');
+const http = require('http');
+const express = require('express');
+const bodyparser = require('body-parser');
+const cors = require('cors');
+
+var app = express();
+app.use(cors());
+app.use(bodyparser.urlencoded({extended:false}));
+app.use(bodyparser.json());
+
 
 const nlpHandler = require('./nlpHandler');
 
-function handleRequest(req, res) {
+async function handleRequest(req, res) {
 
-    let mdata = '';
-    req.on('data', chunk => {
-        mdata += chunk;
-    })
-
-    req.on('end', async() => {
     try {
-            
-        let body = mdata;
-        console.log('data', mdata)
+        console.log("inside ")
+        console.log(req.body);
+        
+        let sentence = req.body.sentence;
             // let body = JSON.parse(mdata) // 'Buy the milk'
 
-        console.log(body);
+        if(!sentence) throw new Error('sentence not found');    
 
-        let query = await nlpHandler.processSentence(body);
-        res.write(query); //write a response to the client
-        res.end(); //end the response
+        let query = await nlpHandler.processSentence(sentence);
+        res.send({query:query}); //write a response to the client
 
     } catch (error) {
-        res.write(error.message); //write a response to the client
-        res.end(); //end the response            
+        res.send({msg:error.message}); //write a response to the client
     }
-    })
 
 }
 
+
+app.route('/').post(handleRequest);
+
+ let PORT = 3000;
+app.listen( PORT, () => {
+    console.log(`listening on ${PORT}`);
+});
+
 //create a server object:
-http.createServer(handleRequest)
-    .listen(3000, function() {
-        console.log("server start at port 3000"); //the server object listens on port 3000
-    });
+// http.createServer(handleRequest)
+//     .listen(3000, function() {
+//         console.log("server start at port 3000"); //the server object listens on port 3000
+//     });

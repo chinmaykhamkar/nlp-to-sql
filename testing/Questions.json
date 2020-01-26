@@ -2,21 +2,23 @@
   {
     "show me everything of %table%":"select",
     "display all data from %table%":"select",
-    "details of %table%":"select"
-  },{
+    "details of %table%":"select",
+    "show all %table%":"select",
+    "give %table%":"select"
+    },{
     "give all %table% where %column% is equal to %colData%":"select.where",
-    "show %tables% which have %column% %operator% %colData%":"select.where",
+    "show %table% which have %column% %operator% %colData%":"select.where",
     "show me data of all %table% that have %column% %operator% %colData%":"select.where",
-    "display %tables% that have %column% %operator% %colData%":"select.where",
-     "%tables% with %column% %operator% %colData%":"select.where" 
+    "display %table% that have %column% %operator% %colData%":"select.where",
+     "%table% with %column% %operator% %colData%":"select.where" 
   },{
     "count number of %table% ":"count",
     "count all %table%": "count"
   },{
     "count number of %table% where %column% is equal to %colData%": "count.where",
-    "display number of %tables% that have %column% as %colData%":"count.where",
+    "display number of %table% that have %column% as %colData%":"count.where",
     "how many %table% have %column% %operator% %colData%":"count.where",
-    "count %tables% which have %column% as %colData%":"count.where",
+    "count %table% which have %column% as %colData%":"count.where",
     "count data of all %table% that have %column% %operator% %colData%":"count.where"
   },
   {
