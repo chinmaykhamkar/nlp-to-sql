@@ -16,7 +16,7 @@ var noteContent = '';
 
 // Get all notes from previous sessions and display them.
 var notes = getAllNotes();
-renderNotes(notes);
+// renderNotes(notes);
 
 
 
@@ -129,7 +129,7 @@ $('#save-note-btn-node').on('click', function(e) {
         // instructions.text('Note saved successfully.');
     }
 
-    sendDataNode({ 'sentence': localStorage.getItem('query') });
+    sendDataNode(localStorage.getItem('query'));
 
 })
 
@@ -162,10 +162,14 @@ function sendData(data) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
+
         })
         .then((response) => response.json())
         .then((data) => {
             console.log('Success:', data);
+            var list = [];
+            list.push(data.query);
+            renderQuery(list);
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -191,6 +195,23 @@ notesList.on('click', function(e) {
 });
 
 
+function renderQuery(list) {
+    console.log(list)
+    var html = '';
+    if (list.length) {
+        list.forEach(function() {
+            html += `<li class="note">
+          <p class="header">          
+          <p class="content">${list}</p>
+          </p>
+        </li>`;
+        });
+    } else {
+        html = '<li><p class="content">You don\'t have any notes yet.</p></li>';
+    }
+    notesList.html(html);
+
+}
 
 /*-----------------------------
       Speech Synthesis 
@@ -214,24 +235,22 @@ function readOutLoud(message) {
       Helper Functions 
 ------------------------------*/
 
-function renderNotes(notes) {
-    var html = '';
-    if (notes.length) {
-        notes.forEach(function(note) {
-            html += `<li class="note">
-          <p class="header">
-            <span class="date">${note.date}</span>
-            <a href="#" class="listen-note" title="Listen to Note">Listen to Note</a>
-            <a href="#" class="delete-note" title="Delete">Delete</a>
-          </p>
-          <p class="content">${note.content}</p>
-        </li>`;
-        });
-    } else {
-        html = '<li><p class="content">You don\'t have any notes yet.</p></li>';
-    }
-    notesList.html(html);
-}
+// function renderNotes(data) {
+//     console.log(data)
+//     var html = '';
+//     if (data.length) {
+//         data.forEach(function() {
+//             html += `<li class="note">
+//           <p class="header">          
+//           <p class="content">${data}</p>
+//           </p>
+//         </li>`;
+//         });
+//     } else {
+//         html = '<li><p class="content">You don\'t have any notes yet.</p></li>';
+//     }
+//     notesList.html(html);
+// }
 
 
 function saveNote(dateTime, content) {
