@@ -7,7 +7,6 @@ cors = CORS(app)
 @app.route('/', methods = ['POST'])
 
 def postJsonHandler():
-    print (request.is_json)
     content = request.get_json()
     print (content)
     return content
