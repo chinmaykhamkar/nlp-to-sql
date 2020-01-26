@@ -73,7 +73,7 @@
     ]
   },
   {
-    "entity": "operator",
+    "entity": "agg",
     "option": "avg",
     "languages": [
       "en"
