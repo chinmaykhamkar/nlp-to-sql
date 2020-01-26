@@ -29,6 +29,7 @@ for(let namedEntitie of namedEntities){
 // manager.addAfterLastCondition('en', 'column', 'have');
 manager.addBetweenCondition('en', 'column',['that','have','that have','where'], ['is','as','greater','less','equal','more']);
 manager.addBetweenCondition('en', 'aggColumn',["max", "maximum","highest","largest", "min", "minimum","smallest","lowest","avg", "average" , "net","cumulative",'sum'], ['of','from']);
+manager.addBetweenCondition('en', 'newColumn',["update", "edit" , "overwrite" , "change"], ['to','as','in']);
 
 // manager.addBetweenCondition('en', 'column',['have','which'], 'as');
 // manager.addBetweenCondition('en', 'column',['have','which'], 'greater');
@@ -39,6 +40,7 @@ manager.addBetweenCondition('en', 'aggColumn',["max", "maximum","highest","large
 
 
 manager.addAfterLastCondition('en', 'colData', ['is','as','than','equals','equal to']);
+manager.addBetweenCondition('en', 'newColData', ['as','to'],['in','where']);
 // manager.addAfterLastCondition('en', 'colData', 'as');
 // manager.addAfterLastCondition('en', 'colData', 'than');
 // manager.addAfterLastCondition('en', 'colData', 'equals');
@@ -52,7 +54,7 @@ manager.addAfterLastCondition('en', 'colData', ['is','as','than','equals','equal
 //     const data = manager.export(true);
 //     fs.writeFileSync('NLUManager/trainedModels/nlu-model.json', data);
 // })();
-let sentence ='total marks of all students which have attendance greater than 50';
+let sentence ='update id as 5 in students where name is Shail';
 manager.train()
 .then(result => manager.process('en',sentence ))
 .then(result => {
@@ -75,6 +77,12 @@ manager.train()
   })[0];
   let colData = result.entities.filter((element)=>{
     return element.entity === 'colData'
+  })[0];
+  let newColData = result.entities.filter((element)=>{
+    return element.entity === 'newColData'
+  })[0];
+  let newColumn = result.entities.filter((element) => {
+    return element.entity === 'newColumn'
   })[0];
 
   let sql;
@@ -104,6 +112,14 @@ manager.train()
 
     sql=`select ${agg.option}(${(aggColumn.sourceText)?(aggColumn.sourceText):('*')}) from ${table.option} where ${column.sourceText} ${operator.option} ${colData.sourceText}`;
   }
+
+  if(result.intent == "update.where"){
+    if(!table)
+      sql=`update tablename set ${newColumn.sourceText}=${newColData.sourceText} where ${column.sourceText}=${colData.sourceText}`;
+    else
+      sql=`update ${table.option} set ${newColumn.sourceText}=${newColData.sourceText} where ${column.sourceText}=${colData.sourceText}` 
+  }
+
   console.log(sql)
 })
 .then(()=>{

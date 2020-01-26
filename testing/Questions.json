@@ -28,5 +28,17 @@
     "show me %agg% %aggColumn% of %table% where %column% is equal to %colData%":"agg.where",
     "display %agg%  %aggColumn% of %table% which have %column% %operator% %colData":"agg.where",
     "%agg%  %aggColumn% of %table% that have %column% %operator% %colData%":"agg.where"
+  },
+  {
+    "update %newColumn% as %newColData% where %column% is %colData%": "update.where",
+    "Change %newColumn% as %newColData% where %column% is %colData%": "update.where",
+    "Edit %newColumn% as %newColData% where %column% is %colData%": "update.where",
+    "Modify %newColumn% as %newColData% where %column% is %colData%": "update.where",
+    "Overwrite %newColumn% to %newColData% where %column% is %colData%": "update.where",
+    "update %newColumn% as %newColData% in %table% where %column% is %colData%": "update.where",
+    "Change %newColumn% as %newColData% in %table% where %column% is %colData%": "update.where",
+    "Edit %newColumn% as %newColData% in %table% where %column% is %colData%": "update.where",
+    "Modify %newColumn% as %newColData% in %table% where %column% is %colData%": "update.where",
+    "Overwrite %newColumn% to %newColData% in %table% where %column% is %colData%": "update.where"
   }
 ]
