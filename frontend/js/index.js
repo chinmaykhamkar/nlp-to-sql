@@ -99,15 +99,40 @@ $('#save-note-btn').on('click', function(e) {
         // The key is the dateTime with seconds, the value is the content of the note.
         saveNote(new Date().toLocaleString(), noteContent);
 
+        saveText(noteContent);
         // Reset variables and update UI.
         noteContent = '';
-        renderNotes(getAllNotes());
+        // renderNotes(getAllNotes());
         noteTextarea.val('');
-        instructions.text('Note saved successfully.');
+        // instructions.text('Note saved successfully.');
     }
+
+    sendData({ sentence: localStorage.getItem('query') });
 
 })
 
+
+function saveText(queryContent) {
+    localStorage.setItem('query', queryContent);
+}
+
+
+function sendData(data) {
+    fetch('http://127.0.0.1:5000/', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
 
 notesList.on('click', function(e) {
     e.preventDefault();
@@ -156,16 +181,16 @@ function renderNotes(notes) {
     if (notes.length) {
         notes.forEach(function(note) {
             html += `<li class="note">
-        <p class="header">
-          <span class="date">${note.date}</span>
-          <a href="#" class="listen-note" title="Listen to Note">Listen to Note</a>
-          <a href="#" class="delete-note" title="Delete">Delete</a>
-        </p>
-        <p class="content">${note.content}</p>
-      </li>`;
+          <p class="header">
+            <span class="date">${note.date}</span>
+            <a href="#" class="listen-note" title="Listen to Note">Listen to Note</a>
+            <a href="#" class="delete-note" title="Delete">Delete</a>
+          </p>
+          <p class="content">${note.content}</p>
+        </li>`;
         });
     } else {
-        html = '<li><p class="content">You don\'t have any results yet.</p></li>';
+        html = '<li><p class="content">You don\'t have any notes yet.</p></li>';
     }
     notesList.html(html);
 }
@@ -190,23 +215,6 @@ function getAllNotes() {
         }
     }
     return notes;
-}
-
-function sendData(content) {
-    fetch('https://localhost/5000', {
-            method: 'POST', // or 'PUT'
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(content),
-        })
-        .then((response) => response.json())
-        .then((content) => {
-            console.log('Success:', content);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
 }
 
 
